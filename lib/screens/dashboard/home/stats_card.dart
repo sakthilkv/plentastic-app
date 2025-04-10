@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:plentastic/constants.dart';
 import 'dart:convert';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class StatsCard extends StatefulWidget {
   const StatsCard({super.key});
@@ -15,18 +18,14 @@ class _StatsCardState extends State<StatsCard> {
   String league = 'Loading...';
   bool isLoading = true;
 
-  // Function to fetch points and league from the server
   Future<void> fetchStats() async {
-    // Fetch points
     final pointsResponse = await http.get(
         Uri.parse('${Constants.apiUrl}user/getpoint?uid=${Constants.userUID}'));
 
-    // Fetch league
     final leagueResponse = await http.get(Uri.parse(
         '${Constants.apiUrl}user/getleague?uid=${Constants.userUID}'));
 
     if (pointsResponse.statusCode == 200 && leagueResponse.statusCode == 200) {
-      // Parse the JSON responses
       final pointsData = json.decode(pointsResponse.body);
       final leagueData = json.decode(leagueResponse.body);
 
@@ -47,75 +46,109 @@ class _StatsCardState extends State<StatsCard> {
   @override
   void initState() {
     super.initState();
-    fetchStats(); // Fetch the stats when the widget is initialized
+    fetchStats();
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20.0),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
+          child: Container(
+            padding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              border: Border.all(color: Colors.white.withOpacity(0.3)),
+              color: Colors.black.withOpacity(0.2),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildStatColumn(
-              icon: Icons.star,
-              title: 'Points',
-              value: isLoading ? 'Loading...' : points,
-              color: Colors.amber,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.star_rounded,
+                      size: 40,
+                      color: Colors.amber,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      isLoading ? 'Loading...' : points,
+                      style: const TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            offset: Offset(1, 1),
+                            blurRadius: 2,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Text(
+                      'Points',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/trophy-solid.svg',
+                      width: 33,
+                      height: 33,
+                      color: const Color.fromARGB(255, 33, 192, 255),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      isLoading ? 'Loading...' : league,
+                      style: const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            offset: Offset(1, 1),
+                            blurRadius: 2,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Text(
+                      'League',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            _buildStatColumn(
-              icon: Icons.shield,
-              title: 'League',
-              value: isLoading ? 'Loading...' : league,
-              color: Colors.blue,
-            ),
-          ],
+          ),
         ),
       ),
-    );
-  }
-
-  Widget _buildStatColumn({
-    required IconData icon,
-    required String title,
-    required String value,
-    required Color color,
-  }) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, color: color, size: 40),
-        const SizedBox(height: 8),
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w500,
-            color: Colors.black,
-          ),
-        ),
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 16, // Smaller font size
-            fontWeight: FontWeight.bold,
-            color: Colors.black54, // Softer black for contrast
-          ),
-        ),
-      ],
     );
   }
 }
