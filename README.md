@@ -19,4 +19,4 @@
 
 | Home | Scan | Result | Store |
 |------|--------|---------|---------|
-| ![Home](screenshots/home.png) | ![Upload](screenshots/scan.png) | ![Rewards](screenshots/result.png) | ![Profile](screenshots/store.png) |
+| ![Home](screenshots/home.jpeg) | ![Scan](screenshots/scan.jpeg) | ![Result](screenshots/result.jpeg) | ![Store](screenshots/store.jpeg) |
