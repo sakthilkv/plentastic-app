@@ -10,6 +10,5 @@
 - 📍 Submit location and description of disposal
 - 🪙 Earn points for every verified submission
 - 🎁 Redeem points for coupons and rewards
-- 👤 User authentication (Supabase Email/Password)
 - 🔒 User-specific point tracking
-- 📊 Admin portal (planned) for reward management
+- 📊 Admin portal for reward management
