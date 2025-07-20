@@ -20,3 +20,7 @@
 | Home | Scan | Result | Store |
 |------|--------|---------|---------|
 | ![Home](screenshots/home.jpeg) | ![Scan](screenshots/scan.jpeg) | ![Result](screenshots/result.jpeg) | ![Store](screenshots/store.jpeg) |
+
+---
+## 📽 Demo
+[![Watch Plentastic in action](screenshots/video-preview.png)](screenshots/working.mp4)
