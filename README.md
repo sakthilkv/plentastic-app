@@ -12,3 +12,11 @@
 - 🎁 Redeem points for coupons and rewards
 - 🔒 User-specific point tracking
 - 📊 Admin portal for reward management
+
+---
+
+## 📸 App Screenshots
+
+| Home | Scan | Result | Store |
+|------|--------|---------|---------|
+| ![Home](screenshots/home.png) | ![Upload](screenshots/scan.png) | ![Rewards](screenshots/result.png) | ![Profile](screenshots/store.png) |
