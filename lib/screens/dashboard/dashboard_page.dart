@@ -74,8 +74,6 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 }
 
-// Sample pages for other tabs
-
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 

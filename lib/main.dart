@@ -10,11 +10,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final greenTheme = ThemeData(
+      brightness: Brightness.light,
+      primarySwatch: Colors.green,
+      scaffoldBackgroundColor: Colors.white,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
+      ),
+      colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green).copyWith(
+        secondary: Colors.lightGreen,
+        surface: Colors.white,
+      ),
+    );
+
     return MaterialApp(
       title: 'Plentastic',
-      themeMode: ThemeMode.dark, // Set dark mode directly
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.light(),
+      themeMode: ThemeMode.light,
+      theme: greenTheme,
+      darkTheme: greenTheme,
       home: const DashboardPage(),
       debugShowCheckedModeBanner: false,
     );

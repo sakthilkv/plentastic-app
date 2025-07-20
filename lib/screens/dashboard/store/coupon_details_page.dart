@@ -4,17 +4,17 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
-import 'package:plentastic/constants.dart'; // For decoding JSON response
+import 'package:plentastic/constants.dart';
 
 class CouponDetailPage extends StatelessWidget {
-  final String id; // The offer_id is passed in as the id parameter
+  final String id;
 
   const CouponDetailPage({required this.id, super.key});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
-      future: _fetchCouponDetails(id), // Fetch coupon details using the id
+      future: _fetchCouponDetails(id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
@@ -49,10 +49,9 @@ class CouponDetailPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Display the cover image
                   Image.network(
                     '${Constants.apiUrl}/${couponData['cover_url']}' ??
-                        'https://via.placeholder.com/150', // Show cover_url
+                        'https://via.placeholder.com/150',
                     height: 250,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -73,7 +72,6 @@ class CouponDetailPage extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 16),
-                  // The rest of the content
                   Text(
                     couponData['title'],
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -173,9 +171,7 @@ class CouponDetailPage extends StatelessWidget {
 
   void _showCouponDialog(
       BuildContext context, Map<String, dynamic> couponData) async {
-    // Perform the redeem operation and get the coupon token
-    final couponToken =
-        await _redeemCoupon(id); // Get coupon token after redeeming
+    final couponToken = await _redeemCoupon(id);
 
     showDialog(
       context: context,
@@ -239,8 +235,7 @@ class CouponDetailPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          couponToken ??
-                              'N/A',
+                          couponToken ?? 'N/A',
                           style: const TextStyle(fontSize: 16),
                         ),
                         IconButton(
@@ -276,9 +271,8 @@ class CouponDetailPage extends StatelessWidget {
   }
 
   Future<String?> _redeemCoupon(String offerId) async {
-    const userId = Constants.userUID; // Get user ID from Constants
+    const userId = Constants.userUID;
 
-    // Construct the URL with user_id and offer_id
     final url = Uri.parse(
       '${Constants.apiUrl}/store/redeem?user_id=$userId&offer_id=$offerId',
     );
@@ -299,7 +293,7 @@ class CouponDetailPage extends StatelessWidget {
       return null;
     } catch (e) {
       print('Error: $e');
-      return null; // Return null if error occurs
+      return null;
     }
   }
 
