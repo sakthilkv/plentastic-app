@@ -1,6 +1,6 @@
 # ♻️ Plentastic
 
-**Plentastic** is a Flutter-based mobile app that rewards users for responsibly disposing of plastic waste. Users earn points by uploading images of collected plastic, which can later be redeemed for real-world rewards and coupons. Built entirely on **Flutter + Supabase**, it’s fast, scalable, and fully serverless.
+**Plentastic** is a Flutter-based mobile app that rewards users for responsibly disposing of plastic waste. Users earn points by uploading images of collected plastic, which can later be redeemed for real-world rewards and coupons. Built entirely on **Flutter + Flask**
 
 ---
 
