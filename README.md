@@ -22,5 +22,7 @@
 | ![Home](screenshots/home.jpeg) | ![Scan](screenshots/scan.jpeg) | ![Result](screenshots/result.jpeg) | ![Store](screenshots/store.jpeg) |
 
 ---
-## 📽 Demo
-[![Watch Plentastic in action](screenshots/video-preview.png)](screenshots/working.mp4)
+
+## ▶️ Demo Video
+
+[![Watch Plentastic Demo](https://img.youtube.com/vi/V2kYnqgilz4/0.jpg)](https://www.youtube.com/watch?v=V2kYnqgilz4)
